@@ -4,8 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useCSSVariable } from "uniwind";
 
 export default function TabTwo() {
-	const accentColor = useCSSVariable("--color-accent");
-	const warningColor = useCSSVariable("--color-warning");
+	const accentColor = useCSSVariable("--color-accent") as string;
+	const warningColor = useCSSVariable("--color-warning") as string;
 
 	return (
 		<Container>
@@ -28,7 +28,7 @@ export default function TabTwo() {
 							<Ionicons
 								name="compass-outline"
 								size={24}
-								color={accentColor as string}
+								color={accentColor}
 								style={{ marginRight: 12 }}
 							/>
 							<Text className="text-foreground font-semibold text-lg">
@@ -45,7 +45,7 @@ export default function TabTwo() {
 							<Ionicons
 								name="settings-outline"
 								size={24}
-								color={warningColor as string}
+								color={warningColor}
 								style={{ marginRight: 12 }}
 							/>
 							<Text className="text-foreground font-semibold text-lg">

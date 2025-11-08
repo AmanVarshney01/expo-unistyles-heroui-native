@@ -3,33 +3,11 @@
 
 @import 'heroui-native/styles';
 
-@source './node_modules/heroui-native/lib';
+@source '../node_modules/heroui-native/lib';
 
 @layer theme {
     :root {
 
-        /* Dark theme variables */
-        @variant dark {
-            --color-background: #000000;
-            --color-foreground: #ffffff;
-            --color-card: #1f2937;
-            --color-border: #374151;
-            --color-muted: #6b7280;
-            --color-muted-foreground: #9ca3af;
-            --color-primary: #3b82f6;
-            --color-primary-foreground: #ffffff;
-            --color-secondary: #1f2937;
-            --color-secondary-foreground: #ffffff;
-            --color-accent: #6366f1;
-            --color-accent-foreground: #ffffff;
-            --color-destructive: #ef4444;
-            --color-destructive-foreground: #ffffff;
-            --color-success: #10b981;
-            --color-warning: #f59e0b;
-            --color-info: #06b6d4;
-        }
-
-        /* Light theme variables */
         @variant light {
             --color-background: #ffffff;
             --color-foreground: #111827;
@@ -49,10 +27,29 @@
             --color-warning: #f59e0b;
             --color-info: #06b6d4;
         }
+
+        @variant dark {
+            --color-background: #000000;
+            --color-foreground: #ffffff;
+            --color-card: #1f2937;
+            --color-border: #374151;
+            --color-muted: #6b7280;
+            --color-muted-foreground: #9ca3af;
+            --color-primary: #3b82f6;
+            --color-primary-foreground: #ffffff;
+            --color-secondary: #1f2937;
+            --color-secondary-foreground: #ffffff;
+            --color-accent: #6366f1;
+            --color-accent-foreground: #ffffff;
+            --color-destructive: #ef4444;
+            --color-destructive-foreground: #ffffff;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-info: #06b6d4;
+        }
     }
 }
 
-/* Custom utility classes */
 @layer utilities {
     .card {
         background-color: var(--color-card);

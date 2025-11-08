@@ -21,10 +21,10 @@ export default function TodosScreen() {
 	const createTodoMutation = useMutation(api.todos.create);
 	const toggleTodoMutation = useMutation(api.todos.toggle);
 	const deleteTodoMutation = useMutation(api.todos.deleteTodo);
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
-	const primaryColor = useCSSVariable("--color-primary");
-	const destructiveColor = useCSSVariable("--color-destructive");
-	const primaryForegroundColor = useCSSVariable("--color-primary-foreground");
+	const mutedForegroundColor = useCSSVariable("--color-muted-foreground") as string;
+	const primaryColor = useCSSVariable("--color-primary") as string;
+	const destructiveColor = useCSSVariable("--color-destructive") as string;
+	const primaryForegroundColor = useCSSVariable("--color-primary-foreground") as string;
 
 	const handleAddTodo = async () => {
 		const text = newTodoText.trim();
@@ -74,7 +74,7 @@ export default function TodosScreen() {
 								value={newTodoText}
 								onChangeText={setNewTodoText}
 								placeholder="Add a new task..."
-								placeholderTextColor={mutedForegroundColor as string}
+								placeholderTextColor={mutedForegroundColor}
 								onSubmitEditing={handleAddTodo}
 								returnKeyType="done"
 								className="text-foreground text-base py-2 px-4 border border-border rounded-lg bg-background"
@@ -88,7 +88,7 @@ export default function TodosScreen() {
 							<Ionicons
 								name="add"
 								size={24}
-								color={primaryForegroundColor as string}
+								color={primaryForegroundColor}
 							/>
 						</TouchableOpacity>
 					</View>
@@ -97,7 +97,7 @@ export default function TodosScreen() {
 				{/* Loading State */}
 				{isLoading && (
 					<View className="items-center justify-center py-12">
-						<ActivityIndicator size="large" color={primaryColor as string} />
+						<ActivityIndicator size="large" color={primaryColor} />
 						<Text className="text-muted-foreground mt-4">
 							Loading todos...
 						</Text>
@@ -110,7 +110,7 @@ export default function TodosScreen() {
 						<Ionicons
 							name="checkbox-outline"
 							size={64}
-							color={mutedForegroundColor as string}
+							color={mutedForegroundColor}
 							style={{ marginBottom: 16 }}
 						/>
 						<Text className="text-foreground text-lg font-semibold mb-2">
@@ -137,7 +137,7 @@ export default function TodosScreen() {
 									<Ionicons
 										name={todo.completed ? "checkbox" : "square-outline"}
 										size={28}
-										color={todo.completed ? (primaryColor as string) : (mutedForegroundColor as string)}
+										color={todo.completed ? primaryColor : mutedForegroundColor}
 									/>
 								</TouchableOpacity>
 								<View className="flex-1">
@@ -157,7 +157,7 @@ export default function TodosScreen() {
 									<Ionicons
 										name="trash-outline"
 										size={24}
-										color={destructiveColor as string}
+										color={destructiveColor}
 									/>
 								</TouchableOpacity>
 							</View>

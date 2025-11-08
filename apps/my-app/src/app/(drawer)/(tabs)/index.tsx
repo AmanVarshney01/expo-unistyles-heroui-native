@@ -1,11 +1,11 @@
 import { Container } from "@/components/container";
 import { ScrollView, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from 'heroui-native';
 
 export default function Home() {
-	const primaryColor = useCSSVariable("--color-primary");
-	const infoColor = useCSSVariable("--color-info");
+	const primaryColor = useThemeColor('link');
+	const infoColor = useThemeColor('success');
 
 	return (
 		<Container>
@@ -28,7 +28,7 @@ export default function Home() {
 							<Ionicons
 								name="star-outline"
 								size={24}
-								color={primaryColor as string}
+								color={primaryColor}
 								style={{ marginRight: 12 }}
 							/>
 							<Text className="text-foreground font-semibold text-lg">
@@ -45,7 +45,7 @@ export default function Home() {
 							<Ionicons
 								name="information-circle-outline"
 								size={24}
-								color={infoColor as string}
+								color={infoColor}
 								style={{ marginRight: 12 }}
 							/>
 							<Text className="text-foreground font-semibold text-lg">

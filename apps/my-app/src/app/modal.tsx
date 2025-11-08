@@ -5,8 +5,8 @@ import { router } from "expo-router";
 import { useCSSVariable } from "uniwind";
 
 export default function Modal() {
-	const primaryColor = useCSSVariable("--color-primary");
-	const primaryForegroundColor = useCSSVariable("--color-primary-foreground");
+	const primaryColor = useCSSVariable("--color-primary") as string;
+	const primaryForegroundColor = useCSSVariable("--color-primary-foreground") as string;
 
 	return (
 		<Container>
@@ -29,7 +29,7 @@ export default function Modal() {
 							<Ionicons
 								name="information-circle"
 								size={24}
-								color={primaryColor as string}
+								color={primaryColor}
 								style={{ marginRight: 12 }}
 							/>
 							<Text className="text-foreground font-semibold text-lg">
@@ -54,7 +54,7 @@ export default function Modal() {
 							<Ionicons
 								name="close-circle"
 								size={24}
-								color={primaryForegroundColor as string}
+								color={primaryForegroundColor}
 							/>
 						</View>
 					</TouchableOpacity>

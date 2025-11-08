@@ -7,11 +7,11 @@ import { useCSSVariable } from "uniwind";
 
 export default function Home() {
 	const healthCheck = useQuery(api.healthCheck.get);
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
-	const successColor = useCSSVariable("--color-success");
-	const destructiveColor = useCSSVariable("--color-destructive");
-	const primaryColor = useCSSVariable("--color-primary");
-	const accentColor = useCSSVariable("--color-accent");
+	const mutedForegroundColor = useCSSVariable("--color-muted-foreground") as string;
+	const successColor = useCSSVariable("--color-success") as string;
+	const destructiveColor = useCSSVariable("--color-destructive") as string;
+	const primaryColor = useCSSVariable("--color-primary") as string;
+	const accentColor = useCSSVariable("--color-accent") as string;
 
 	const isConnected = healthCheck === "OK";
 	const isLoading = healthCheck === undefined;
@@ -19,7 +19,6 @@ export default function Home() {
 	return (
 		<Container>
 			<ScrollView className="flex-1" contentContainerClassName="p-6">
-				{/* Header */}
 				<View className="mb-8">
 					<Text className="text-4xl font-bold text-foreground mb-2">
 						BETTER T STACK
@@ -28,8 +27,6 @@ export default function Home() {
 						Your app dashboard
 					</Text>
 				</View>
-
-				{/* System Status Card */}
 				<View className="card mb-6">
 					<View className="flex-row items-center justify-between mb-4">
 						<Text className="text-lg font-semibold text-foreground">
@@ -41,8 +38,6 @@ export default function Home() {
 							</Text>
 						</View>
 					</View>
-
-					{/* Status Indicator */}
 					<View className="flex-row items-center mb-4">
 						<View className={`w-3 h-3 rounded-full mr-3 ${isConnected ? "bg-success" : "bg-muted"}`} />
 						<View className="flex-1">
@@ -61,27 +56,25 @@ export default function Home() {
 							<Ionicons
 								name="hourglass-outline"
 								size={20}
-								color={mutedForegroundColor as string}
+								color={mutedForegroundColor}
 							/>
 						)}
 						{!isLoading && isConnected && (
 							<Ionicons
 								name="checkmark-circle"
 								size={20}
-								color={successColor as string}
+								color={successColor}
 							/>
 						)}
 						{!isLoading && !isConnected && (
 							<Ionicons
 								name="close-circle"
 								size={20}
-								color={destructiveColor as string}
+								color={destructiveColor}
 							/>
 						)}
 					</View>
 				</View>
-
-				{/* Quick Actions */}
 				<View className="mb-6">
 					<Text className="text-lg font-semibold text-foreground mb-4">
 						Quick Actions
@@ -91,7 +84,7 @@ export default function Home() {
 							<Ionicons
 								name="list-outline"
 								size={24}
-								color={primaryColor as string}
+								color={primaryColor}
 								style={{ marginBottom: 8 }}
 							/>
 							<Text className="text-foreground font-medium">
@@ -105,7 +98,7 @@ export default function Home() {
 							<Ionicons
 								name="apps-outline"
 								size={24}
-								color={accentColor as string}
+								color={accentColor}
 								style={{ marginBottom: 8 }}
 							/>
 							<Text className="text-foreground font-medium">

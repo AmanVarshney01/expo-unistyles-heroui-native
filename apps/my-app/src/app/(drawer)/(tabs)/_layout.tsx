@@ -1,31 +1,31 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from 'heroui-native';
 
 export default function TabLayout() {
-	const foregroundColor = useCSSVariable("--color-foreground");
-	const cardColor = useCSSVariable("--color-card");
-	const primaryColor = useCSSVariable("--color-primary");
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
-	const borderColor = useCSSVariable("--color-border");
+	const themeColorForeground = useThemeColor('foreground');
+	const themeColorBackground = useThemeColor('background');
+	const themeColorLink = useThemeColor('link');
+	const themeColorMuted = useThemeColor('surface-secondary');
+	const themeColorBorder = useThemeColor('border');
 
 	return (
 		<Tabs
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: cardColor as string,
+					backgroundColor: themeColorBackground,
 				},
-				headerTintColor: foregroundColor as string,
+				headerTintColor: themeColorForeground,
 				headerTitleStyle: {
-					color: foregroundColor as string,
+					color: themeColorForeground,
 					fontWeight: "600",
 				},
 				tabBarStyle: {
-					backgroundColor: cardColor as string,
-					borderTopColor: borderColor as string,
+					backgroundColor: themeColorBackground,
+					borderTopColor: themeColorBorder,
 				},
-				tabBarActiveTintColor: primaryColor as string,
-				tabBarInactiveTintColor: mutedForegroundColor as string,
+				tabBarActiveTintColor: themeColorLink,
+				tabBarInactiveTintColor: themeColorMuted,
 			}}
 		>
 			<Tabs.Screen

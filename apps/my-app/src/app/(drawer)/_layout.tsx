@@ -1,33 +1,40 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Drawer } from "expo-router/drawer";
-import { Pressable } from "react-native";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from 'heroui-native';
+import { Platform, Pressable } from "react-native";
+import { useCallback } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useAppTheme } from "@/contexts/app-theme-context";
 
 const DrawerLayout = () => {
-	const foregroundColor = useCSSVariable("--color-foreground");
-	const cardColor = useCSSVariable("--color-card");
-	const primaryColor = useCSSVariable("--color-primary");
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
+	const { isDark } = useAppTheme();
+	const themeColorForeground = useThemeColor('foreground');
+	const themeColorBackground = useThemeColor('background');
+	const themeColorLink = useThemeColor('link');
+	const themeColorSurfaceSecondary = useThemeColor('surface-secondary');
+
+	const _renderThemeToggle = useCallback(() => <ThemeToggle />, []);
 
 	return (
 		<Drawer
 			screenOptions={{
+				headerTintColor: themeColorForeground,
 				headerStyle: {
-					backgroundColor: cardColor as string,
+					backgroundColor: themeColorBackground,
 				},
-				headerTintColor: foregroundColor as string,
 				headerTitleStyle: {
-					color: foregroundColor as string,
-					fontWeight: "600",
+					fontWeight: '600',
+					color: themeColorForeground,
 				},
+				headerRight: _renderThemeToggle,
 				drawerStyle: {
-					backgroundColor: cardColor as string,
+					backgroundColor: themeColorBackground,
 				},
-				drawerActiveTintColor: primaryColor as string,
-				drawerInactiveTintColor: mutedForegroundColor as string,
+				drawerActiveTintColor: themeColorLink,
+				drawerInactiveTintColor: themeColorSurfaceSecondary,
 				drawerLabelStyle: {
-					color: foregroundColor as string,
+					color: themeColorForeground,
 				},
 			}}
 		>
@@ -52,7 +59,7 @@ const DrawerLayout = () => {
 					headerRight: () => (
 						<Link href="/modal" asChild>
 							<Pressable className="mr-4">
-								<Ionicons name="add-outline" size={24} color={foregroundColor as string} />
+								<Ionicons name="add-outline" size={24} color={themeColorForeground} />
 							</Pressable>
 						</Link>
 					),
