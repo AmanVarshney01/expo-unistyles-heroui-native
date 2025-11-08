@@ -1,10 +1,36 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Drawer } from "expo-router/drawer";
+import { Pressable } from "react-native";
+import { useCSSVariable } from "uniwind";
 
 const DrawerLayout = () => {
+	const foregroundColor = useCSSVariable("--color-foreground");
+	const cardColor = useCSSVariable("--color-card");
+	const primaryColor = useCSSVariable("--color-primary");
+	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
+
 	return (
-		<Drawer>
+		<Drawer
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: cardColor as string,
+				},
+				headerTintColor: foregroundColor as string,
+				headerTitleStyle: {
+					color: foregroundColor as string,
+					fontWeight: "600",
+				},
+				drawerStyle: {
+					backgroundColor: cardColor as string,
+				},
+				drawerActiveTintColor: primaryColor as string,
+				drawerInactiveTintColor: mutedForegroundColor as string,
+				drawerLabelStyle: {
+					color: foregroundColor as string,
+				},
+			}}
+		>
 			<Drawer.Screen
 				name="index"
 				options={{
@@ -25,7 +51,9 @@ const DrawerLayout = () => {
 					),
 					headerRight: () => (
 						<Link href="/modal" asChild>
-							<Ionicons name="add-outline" size={24} color="black" />
+							<Pressable className="mr-4">
+								<Ionicons name="add-outline" size={24} color={foregroundColor as string} />
+							</Pressable>
 						</Link>
 					),
 				}}

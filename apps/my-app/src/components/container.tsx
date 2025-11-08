@@ -1,7 +1,11 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, View } from "react-native";
 
 export const Container = ({ children }: { children: React.ReactNode }) => {
-    return <SafeAreaView>{children}</SafeAreaView>;
+    return (
+        <SafeAreaView className="flex-1 bg-background">
+            <View className="flex-1">{children}</View>
+        </SafeAreaView>
+    );
 };
 

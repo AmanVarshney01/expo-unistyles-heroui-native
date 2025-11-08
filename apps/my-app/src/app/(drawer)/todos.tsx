@@ -13,6 +13,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@my-better-t-app/backend/convex/_generated/api";
 import type { Id } from "@my-better-t-app/backend/convex/_generated/dataModel";
 import { Container } from "@/components/container";
+import { useCSSVariable } from "uniwind";
 
 export default function TodosScreen() {
 	const [newTodoText, setNewTodoText] = useState("");
@@ -20,6 +21,10 @@ export default function TodosScreen() {
 	const createTodoMutation = useMutation(api.todos.create);
 	const toggleTodoMutation = useMutation(api.todos.toggle);
 	const deleteTodoMutation = useMutation(api.todos.deleteTodo);
+	const mutedForegroundColor = useCSSVariable("--color-muted-foreground");
+	const primaryColor = useCSSVariable("--color-primary");
+	const destructiveColor = useCSSVariable("--color-destructive");
+	const primaryForegroundColor = useCSSVariable("--color-primary-foreground");
 
 	const handleAddTodo = async () => {
 		const text = newTodoText.trim();
@@ -44,81 +49,121 @@ export default function TodosScreen() {
 	};
 
 	const isLoading = !todos;
-	const isCreating = false;
-	const primaryButtonTextColor = "black";
 
 	return (
 		<Container>
-			<ScrollView>
-				<View>
-					<Text>Todo List</Text>
-					<Text>
+			<ScrollView
+				className="flex-1"
+				contentContainerClassName="p-6"
+			>
+				{/* Header */}
+				<View className="mb-6">
+					<Text className="text-3xl font-bold text-foreground mb-2">
+						Todo List
+					</Text>
+					<Text className="text-muted-foreground text-base">
 						Manage your tasks efficiently
 					</Text>
+				</View>
 
-					<View>
-						<TextInput
-							value={newTodoText}
-							onChangeText={setNewTodoText}
-							placeholder="Add a new task..."
-							placeholderTextColor="black"
-							editable={!isCreating}
-							onSubmitEditing={handleAddTodo}
-							returnKeyType="done"
-						/>
+				{/* Add Todo Input */}
+				<View className="card mb-6">
+					<View className="flex-row items-center gap-3">
+						<View className="flex-1">
+							<TextInput
+								value={newTodoText}
+								onChangeText={setNewTodoText}
+								placeholder="Add a new task..."
+								placeholderTextColor={mutedForegroundColor as string}
+								onSubmitEditing={handleAddTodo}
+								returnKeyType="done"
+								className="text-foreground text-base py-2 px-4 border border-border rounded-lg bg-background"
+							/>
+						</View>
 						<TouchableOpacity
 							onPress={handleAddTodo}
-							disabled={isCreating || !newTodoText.trim()}
+							disabled={!newTodoText.trim()}
+							className={`p-3 rounded-lg ${newTodoText.trim() ? "bg-primary" : "bg-muted"}`}
 						>
-							{isCreating ? (
-								<ActivityIndicator
-									size="small"
-									color={primaryButtonTextColor}
-								/>
-							) : (
-								<Ionicons name="add" size={24} color={primaryButtonTextColor} />
-							)}
+							<Ionicons
+								name="add"
+								size={24}
+								color={primaryForegroundColor as string}
+							/>
 						</TouchableOpacity>
 					</View>
 				</View>
 
+				{/* Loading State */}
 				{isLoading && (
-					<View>
-						<ActivityIndicator size="large" color="black" />
-						<Text>Loading todos...</Text>
+					<View className="items-center justify-center py-12">
+						<ActivityIndicator size="large" color={primaryColor as string} />
+						<Text className="text-muted-foreground mt-4">
+							Loading todos...
+						</Text>
 					</View>
 				)}
 
+				{/* Empty State */}
 				{todos && todos.length === 0 && !isLoading && (
-					<Text>No todos yet. Add one!</Text>
-				)}
-				{todos?.map((todo) => (
-					<View key={todo._id}>
-						<TouchableOpacity
-							onPress={() => handleToggleTodo(todo._id, todo.completed)}
-						>
-							<Ionicons
-								name={todo.completed ? "checkbox" : "square-outline"}
-								size={24}
-								color={
-									todo.completed
-										? "black"
-										: "black"
-								}
-							/>
-							<Text>
-								{todo.text}
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => handleDeleteTodo(todo._id)}>
-							<Ionicons
-								name="trash-outline"
-								size={24}
-								color="black"
-							/>
-						</TouchableOpacity>
+					<View className="items-center justify-center py-12">
+						<Ionicons
+							name="checkbox-outline"
+							size={64}
+							color={mutedForegroundColor as string}
+							style={{ marginBottom: 16 }}
+						/>
+						<Text className="text-foreground text-lg font-semibold mb-2">
+							No todos yet
+						</Text>
+						<Text className="text-muted-foreground text-center">
+							Add your first task to get started!
+						</Text>
 					</View>
-				))}
+				)}
+
+				{/* Todos List */}
+				{todos && todos.length > 0 && (
+					<View className="gap-3">
+						{todos.map((todo) => (
+							<View
+								key={todo._id}
+								className="card flex-row items-center gap-3"
+							>
+								<TouchableOpacity
+									onPress={() => handleToggleTodo(todo._id, todo.completed)}
+									className="p-2"
+								>
+									<Ionicons
+										name={todo.completed ? "checkbox" : "square-outline"}
+										size={28}
+										color={todo.completed ? (primaryColor as string) : (mutedForegroundColor as string)}
+									/>
+								</TouchableOpacity>
+								<View className="flex-1">
+									<Text
+										className={`text-base ${todo.completed
+											? "text-muted-foreground line-through"
+											: "text-foreground"
+											}`}
+									>
+										{todo.text}
+									</Text>
+								</View>
+								<TouchableOpacity
+									onPress={() => handleDeleteTodo(todo._id)}
+									className="p-2"
+								>
+									<Ionicons
+										name="trash-outline"
+										size={24}
+										color={destructiveColor as string}
+									/>
+								</TouchableOpacity>
+							</View>
+						))}
+					</View>
+				)}
 			</ScrollView>
 		</Container>
 	);
