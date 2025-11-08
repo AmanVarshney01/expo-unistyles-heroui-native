@@ -1,6 +1,10 @@
 import "../global.css";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
+
+export const unstable_settings = {
+  initialRouteName: "(drawer)",
+};
 
 const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL || "", {
   unsavedChangesWarning: false,
@@ -9,7 +13,16 @@ const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL || "", {
 export default function Layout() {
   return (
     <ConvexProvider client={convex}>
-      <Slot />
-    </ConvexProvider >
-  )
+      <Stack
+        screenOptions={{
+        }}
+      >
+        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="modal"
+          options={{ title: "Modal", presentation: "modal" }}
+        />
+      </Stack>
+    </ConvexProvider>
+  );
 }
