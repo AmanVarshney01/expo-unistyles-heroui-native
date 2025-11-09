@@ -56,7 +56,6 @@ export default function TodosScreen() {
 				className="flex-1"
 				contentContainerClassName="p-6"
 			>
-				{/* Header */}
 				<View className="mb-6">
 					<Text className="text-3xl font-bold text-foreground mb-2">
 						Todo List
@@ -66,8 +65,7 @@ export default function TodosScreen() {
 					</Text>
 				</View>
 
-				{/* Add Todo Input */}
-				<View className="card mb-6">
+				<View className="mb-6">
 					<View className="flex-row items-center gap-3">
 						<View className="flex-1">
 							<TextInput
@@ -94,7 +92,6 @@ export default function TodosScreen() {
 					</View>
 				</View>
 
-				{/* Loading State */}
 				{isLoading && (
 					<View className="items-center justify-center py-12">
 						<ActivityIndicator size="large" color={primaryColor} />
@@ -104,7 +101,6 @@ export default function TodosScreen() {
 					</View>
 				)}
 
-				{/* Empty State */}
 				{todos && todos.length === 0 && !isLoading && (
 					<View className="items-center justify-center py-12">
 						<Ionicons

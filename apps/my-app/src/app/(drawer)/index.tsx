@@ -21,16 +21,14 @@ export default function Home() {
 					BETTER T STACK
 				</Text>
 			</View>
-			<View className="card mb-6">
+			<View className="mb-6">
 				<View className="flex-row items-center justify-between mb-4">
 					<Text className="text-lg font-semibold text-foreground">
 						System Status
 					</Text>
-					<View className={`status-badge ${isConnected ? "status-live" : "status-offline"}`}>
-						<Text className="text-white font-semibold">
-							{isConnected ? "LIVE" : "OFFLINE"}
-						</Text>
-					</View>
+					<Text className="text-foreground font-semibold">
+						{isConnected ? "LIVE" : "OFFLINE"}
+					</Text>
 				</View>
 				<View className="flex-row items-center mb-4">
 					<View className={`w-3 h-3 rounded-full mr-3 ${isConnected ? "bg-success" : "bg-muted"}`} />

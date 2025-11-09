@@ -2,17 +2,13 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useThemeColor } from 'heroui-native';
-import { Platform, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { useCallback } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { useAppTheme } from "@/contexts/app-theme-context";
 
 const DrawerLayout = () => {
-	const { isDark } = useAppTheme();
 	const themeColorForeground = useThemeColor('foreground');
 	const themeColorBackground = useThemeColor('background');
-	const themeColorLink = useThemeColor('link');
-	const themeColorSurfaceSecondary = useThemeColor('surface-secondary');
 
 	const _renderThemeToggle = useCallback(() => <ThemeToggle />, []);
 
@@ -30,11 +26,6 @@ const DrawerLayout = () => {
 				headerRight: _renderThemeToggle,
 				drawerStyle: {
 					backgroundColor: themeColorBackground,
-				},
-				drawerActiveTintColor: themeColorLink,
-				drawerInactiveTintColor: themeColorSurfaceSecondary,
-				drawerLabelStyle: {
-					color: themeColorForeground,
 				},
 			}}
 		>
