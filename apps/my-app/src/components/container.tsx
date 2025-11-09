@@ -21,8 +21,7 @@ export const Container: FC<PropsWithChildren<Props>> = ({
         <AnimatedView
             className={cn('flex-1 bg-background', className)}
             style={{
-                paddingTop: insets.top,
-                paddingBottom: insets.bottom + 32,
+                paddingBottom: insets.bottom,
             }}
             {...props}
         >

@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Container } from "@/components/container";
 import { useQuery } from "convex/react";
 import { api } from "@my-better-t-app/backend/convex/_generated/api";
@@ -10,20 +10,15 @@ export default function Home() {
 	const mutedForegroundColor = useThemeColor('surface-secondary');
 	const successColor = useThemeColor('success');
 	const destructiveColor = useThemeColor('destructive' as any);
-	const primaryColor = useThemeColor('link');
-	const accentColor = useThemeColor('link');
 
 	const isConnected = healthCheck === "OK";
 	const isLoading = healthCheck === undefined;
 
 	return (
-		<Container>
-			<View className="mb-8">
+		<Container className="p-2">
+			<View className="py-4">
 				<Text className="text-4xl font-bold text-foreground mb-2">
 					BETTER T STACK
-				</Text>
-				<Text className="text-muted-foreground text-base">
-					Your app dashboard
 				</Text>
 			</View>
 			<View className="card mb-6">
