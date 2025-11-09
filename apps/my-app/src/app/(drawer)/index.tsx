@@ -3,15 +3,15 @@ import { Container } from "@/components/container";
 import { useQuery } from "convex/react";
 import { api } from "@my-better-t-app/backend/convex/_generated/api";
 import { Ionicons } from "@expo/vector-icons";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from 'heroui-native';
 
 export default function Home() {
 	const healthCheck = useQuery(api.healthCheck.get);
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground") as string;
-	const successColor = useCSSVariable("--color-success") as string;
-	const destructiveColor = useCSSVariable("--color-destructive") as string;
-	const primaryColor = useCSSVariable("--color-primary") as string;
-	const accentColor = useCSSVariable("--color-accent") as string;
+	const mutedForegroundColor = useThemeColor('surface-secondary');
+	const successColor = useThemeColor('success');
+	const destructiveColor = useThemeColor('destructive' as any);
+	const primaryColor = useThemeColor('link');
+	const accentColor = useThemeColor('link');
 
 	const isConnected = healthCheck === "OK";
 	const isLoading = healthCheck === undefined;

@@ -13,7 +13,7 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@my-better-t-app/backend/convex/_generated/api";
 import type { Id } from "@my-better-t-app/backend/convex/_generated/dataModel";
 import { Container } from "@/components/container";
-import { useCSSVariable } from "uniwind";
+import { useThemeColor } from 'heroui-native';
 
 export default function TodosScreen() {
 	const [newTodoText, setNewTodoText] = useState("");
@@ -21,10 +21,10 @@ export default function TodosScreen() {
 	const createTodoMutation = useMutation(api.todos.create);
 	const toggleTodoMutation = useMutation(api.todos.toggle);
 	const deleteTodoMutation = useMutation(api.todos.deleteTodo);
-	const mutedForegroundColor = useCSSVariable("--color-muted-foreground") as string;
-	const primaryColor = useCSSVariable("--color-primary") as string;
-	const destructiveColor = useCSSVariable("--color-destructive") as string;
-	const primaryForegroundColor = useCSSVariable("--color-primary-foreground") as string;
+	const mutedForegroundColor = useThemeColor('surface-secondary');
+	const primaryColor = useThemeColor('link');
+	const destructiveColor = useThemeColor('destructive' as any);
+	const primaryForegroundColor = useThemeColor('foreground');
 
 	const handleAddTodo = async () => {
 		const text = newTodoText.trim();
